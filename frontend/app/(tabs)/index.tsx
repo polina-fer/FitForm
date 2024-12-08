@@ -4,9 +4,30 @@ import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import VideoPicker from "@/components/VideoPicker";
+import { useState } from "react";
 
 export default function HomeScreen() {
+  const [result, setResult] = useState("");
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch("http://192.168.178.48:8000/test", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
+      Alert.alert("Success", data);
+    } catch (error) {
+      console.error("Error:", error);
+      Alert.alert("Error", "Failed to connect to the backend");
+    }
+  };
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -32,7 +53,7 @@ export default function HomeScreen() {
       </ThemedView>
 
       <ThemedView style={styles.stepContainer}>
-        <Button title="Upload video file" onPress={() => {}} />
+        <Button title="Upload video file" onPress={handleSubmit} />
       </ThemedView>
     </ParallaxScrollView>
   );
