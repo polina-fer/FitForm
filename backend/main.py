@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -25,3 +25,10 @@ def read_root():
 @app.get("/test")
 async def test():
     return "Response from backend!"
+
+
+@app.post("/video")
+async def video(file: UploadFile = File(...)):
+    if file:
+        return "succcess"
+    return "something went wrong"

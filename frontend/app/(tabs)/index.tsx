@@ -4,10 +4,9 @@ import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { useState } from "react";
+import VideoPicker from "@/components/MediaPicker";
 
 export default function HomeScreen() {
-  const [result, setResult] = useState("");
   const handleSubmit = async () => {
     try {
       const response = await fetch("http://192.168.178.48:8000/test", {
@@ -53,7 +52,7 @@ export default function HomeScreen() {
       </ThemedView>
 
       <ThemedView style={styles.stepContainer}>
-        <Button title="Upload video file" onPress={handleSubmit} />
+        <VideoPicker />
       </ThemedView>
     </ParallaxScrollView>
   );
