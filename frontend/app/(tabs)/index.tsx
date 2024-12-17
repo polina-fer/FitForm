@@ -4,7 +4,7 @@ import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import VideoPicker from "@/components/MediaPicker";
+import MediaPicker from "@/components/MediaPicker";
 
 export default function HomeScreen() {
   const handleSubmit = async () => {
@@ -23,7 +23,6 @@ export default function HomeScreen() {
       const data = await response.json();
       Alert.alert("Success", data);
     } catch (error) {
-      console.error("Error:", error);
       Alert.alert("Error", "Failed to connect to the backend");
     }
   };
@@ -45,14 +44,11 @@ export default function HomeScreen() {
         Detect joints in a video in real time or in an uploaded file
       </ThemedText>
       <ThemedView style={styles.stepContainer}>
-        <Button
-          title="Open camera"
-          onPress={() => Alert.alert("Simple Button pressed")}
-        />
+        <Button title="Open camera" onPress={handleSubmit} />
       </ThemedView>
 
       <ThemedView style={styles.stepContainer}>
-        <VideoPicker />
+        <MediaPicker />
       </ThemedView>
     </ParallaxScrollView>
   );
